@@ -99,8 +99,11 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 #Wwise
-.cache
+.backup*
+.cache*
 *.akd
 *.prof
 *.validationcache
+*.wsettings
+IncrementalSoundBankData.xml
 */Assets/Wwise/Editor/ProjectData/AkWwiseProjectData.asset*
