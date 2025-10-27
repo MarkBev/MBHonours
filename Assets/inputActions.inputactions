@@ -1,0 +1,52 @@
+{
+    "version": 1,
+    "name": "inputActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "5d2b76b1-e80b-40c6-98f3-f8f1988ec409",
+            "actions": [
+                {
+                    "name": "Submit",
+                    "type": "PassThrough",
+                    "id": "9b279783-a7fb-40c1-bf7b-96230c7f5ba5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b22fb0a0-cd8c-40de-8d51-0da7e40d7950",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard & Mouse",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard & Mouse",
+            "bindingGroup": "Keyboard & Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
