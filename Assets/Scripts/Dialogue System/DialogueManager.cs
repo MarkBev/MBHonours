@@ -22,13 +22,16 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI speakerText;
     [SerializeField] private GameObject continueIcon;
+    [Header("text print speed")]
+    [SerializeField] private float textSpeed = 0.04f;
     [Header("UI Elements for Choices")]
     [SerializeField] private GameObject choicePanel;
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
+    [Header("Portrait Elements")]
+    [SerializeField] private Animator portraitAnimator;
 
-    [Header("text print speed")]
-    [SerializeField] private float textSpeed = 0.04f;
+    
 
     [Header("Don't need to set this")]
     public TextAsset dialogueTextAsset;
@@ -164,6 +167,7 @@ public class DialogueManager : MonoBehaviour
                     Debug.Log(tagValue);
                     break;
                 case PORTRAIT_TAG:
+                    portraitAnimator.Play(tagValue);
 
                     break;
                 case LAYOUT_TAG:
@@ -249,12 +253,15 @@ public class DialogueManager : MonoBehaviour
 
     private IEnumerator DisplayLine (string line)
     {
+        //clears any existing text
         dialogueText.text = " ";
+        //makes sure that lines cannot be skipped without going to the end first, and hides choices and the continue icon
         canContinueToNextLine = false;
         continueIcon.SetActive(false);
         HideChoices();
 
         bool isAddingRichTextTag = false;
+
 
         foreach (char letter in line.ToCharArray())
         {
@@ -262,6 +269,8 @@ public class DialogueManager : MonoBehaviour
             if (Keyboard.current[Key.Space].wasPressedThisFrame)
                 {
                 dialogueText.text = line;
+                canContinueToNextLine = false;
+                
                 break;
                 }
 
@@ -285,6 +294,7 @@ public class DialogueManager : MonoBehaviour
 
         canContinueToNextLine = true;
         continueIcon.SetActive(true);
+    
         //display choices if any for this dialogue line
         DisplayChoices();
     }
