@@ -49,6 +49,7 @@ public class CharacterSelect : MonoBehaviour
     {
         if (choiceMade == true)
         {
+            Debug.Log("Character name is: " + dialogueManager.characterName + " Character Role is " + dialogueManager.characterRole + "Character Style is " + dialogueManager.characterStyle + " Character number is " + dialogueManager.characterNumber);
             characterSelect.SetActive(false);
             shipSelect.SetActive(true);
         }
