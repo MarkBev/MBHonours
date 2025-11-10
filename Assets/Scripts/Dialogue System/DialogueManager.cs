@@ -11,6 +11,7 @@ using UnityEngine.SearchService;
 using Gaskellgames;
 using NUnit.Framework.Internal.Commands;
 
+
 public class DialogueManager : MonoBehaviour
 {
     [Header("UI Panels for Character select")]
@@ -20,11 +21,14 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private TextMeshProUGUI speakerText;
+    [SerializeField] private GameObject continueIcon;
     [Header("UI Elements for Choices")]
     [SerializeField] private GameObject choicePanel;
     [SerializeField] private GameObject[] choices;
     private TextMeshProUGUI[] choicesText;
-    
+
+    [Header("text print speed")]
+    [SerializeField] private float textSpeed = 0.04f;
 
     [Header("Don't need to set this")]
     public TextAsset dialogueTextAsset;
@@ -45,6 +49,8 @@ public class DialogueManager : MonoBehaviour
 
     private bool dialogueisPlaying;
     private static DialogueManager instance;
+    private Coroutine displayLineCoroutine;
+    private bool canContinueToNextLine = false;
     //tag keys
     private const string SPEAKER_TAG = "speaker";
     private const string PORTRAIT_TAG = "portrait";
@@ -90,7 +96,7 @@ public class DialogueManager : MonoBehaviour
         }
         // Need to add trigger for taking player input and continuing
         
-        if (Keyboard.current[Key.Space].wasPressedThisFrame)
+        if (canContinueToNextLine && Keyboard.current[Key.Space].wasPressedThisFrame)
         {
             ContinueStory();
         }
@@ -113,10 +119,14 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+            
+            if (displayLineCoroutine != null)
+            {
+                StopCoroutine(displayLineCoroutine);
+            }
             //set text for current dialogue line
-            dialogueText.text = currentStory.Continue();
-            //display choices if any for this dialogue line
-            DisplayChoices();
+            displayLineCoroutine = StartCoroutine(DisplayLine(currentStory.Continue()));
+            
             HandleTags(currentStory.currentTags);
         }
         else
@@ -214,8 +224,19 @@ public class DialogueManager : MonoBehaviour
 
     public void MakeChoice(int choiceIndex)
     {
-        currentStory.ChooseChoiceIndex(choiceIndex);
+        if (canContinueToNextLine)
+        {
+            currentStory.ChooseChoiceIndex(choiceIndex);
+        }
        // ContinueStory();
+    }
+
+    public void HideChoices()
+    {
+        foreach (GameObject choiceButton in choices)
+        {
+            choiceButton.SetActive(false);
+        }
     }
 
     private IEnumerator SelectFirstChoice()
@@ -224,5 +245,47 @@ public class DialogueManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
         yield return new WaitForEndOfFrame();
         EventSystem.current.SetSelectedGameObject(choices[0].gameObject);
+    }
+
+    private IEnumerator DisplayLine (string line)
+    {
+        dialogueText.text = " ";
+        canContinueToNextLine = false;
+        continueIcon.SetActive(false);
+        HideChoices();
+
+        bool isAddingRichTextTag = false;
+
+        foreach (char letter in line.ToCharArray())
+        {
+            //if player presses space jumps to the end of the line
+            if (Keyboard.current[Key.Space].wasPressedThisFrame)
+                {
+                dialogueText.text = line;
+                break;
+                }
+
+            if (letter == '<' || isAddingRichTextTag)
+            {
+                isAddingRichTextTag = true;
+                dialogueText.text += letter;
+                if(letter == '>')
+                {
+                    isAddingRichTextTag = false;
+                }
+
+            }
+            else
+            {
+                //adds each character to the displayed line
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(textSpeed);
+            }
+        }
+
+        canContinueToNextLine = true;
+        continueIcon.SetActive(true);
+        //display choices if any for this dialogue line
+        DisplayChoices();
     }
 }

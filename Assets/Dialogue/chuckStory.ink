@@ -2,7 +2,7 @@
 
 
 === main ===
-Hi I am Chuck Cluckers, you have chosen my story! # speaker:Chuck
+Hi I am <color=\#F8FF30>Chuck Cluckers</color>, you have chosen my story! # speaker:Chuck
 This will be further dialogue for chuck. #speaker:Narrator
 Which is your favourite Cosmic Coda Game? #speaker:Chuck Cluckers
 + [END Protocol]

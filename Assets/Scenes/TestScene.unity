@@ -916,6 +916,7 @@ MonoBehaviour:
   dialoguePanel: {fileID: 1492157365}
   dialogueText: {fileID: 1595202596}
   speakerText: {fileID: 1094203564}
+  continueIcon: {fileID: 3416419256501958638}
   choicePanel: {fileID: 1037467373}
   choices:
   - {fileID: 1074233056}
@@ -926,6 +927,7 @@ MonoBehaviour:
   - {fileID: 339397257}
   - {fileID: 1460818285}
   - {fileID: 1543976686}
+  textSpeed: 0.04
   dialogueTextAsset: {fileID: 0}
   characterNumber: 1
   characterName: DefaultName
@@ -1720,6 +1722,11 @@ PrefabInstance:
       addedObject: {fileID: 163232770}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b648ff83c9e6038499b69f4121e2a904, type: 3}
+--- !u!1 &3416419256501958638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6013247055964838304, guid: b648ff83c9e6038499b69f4121e2a904, type: 3}
+  m_PrefabInstance: {fileID: 3416419256501958637}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4294249076689803454
 PrefabInstance:
   m_ObjectHideFlags: 0
