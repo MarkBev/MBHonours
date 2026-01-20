@@ -17,9 +17,16 @@ public class CharacterSelect : MonoBehaviour
 
     private bool choiceMade = false;
     private bool shipChoiceMade = false;
+    private GameManager gameManager;
+
 
     private void Awake()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
+        if (gameManager == null)
+        {
+            Debug.LogError("There is no GameManager");
+        }
         dialogueManager = GetComponent<DialogueManager>();
         choiceMade = false;
         shipChoiceMade = false;
@@ -28,19 +35,19 @@ public class CharacterSelect : MonoBehaviour
     }
     public void SetCharacterChuck()
     {
-        dialogueManager.characterName = "Chuck Cluckers";
-        dialogueManager.characterRole = "Soldier";
-        dialogueManager.characterStyle = "Heroic";
-        dialogueManager.characterNumber = 5f;
+        gameManager.characterName = "Chuck Cluckers";
+        gameManager.characterRole = "Soldier";
+        gameManager.characterStyle = "Heroic";
+        gameManager.characterNumber = 5f;
         dialogueManager.dialogueTextAsset = chuckStory;
         choiceMade = true;
     }
     public void SetCharacterSimon()
     {
-        dialogueManager.characterName = "Stellar Simon";
-        dialogueManager.characterRole = "Explorer";
-        dialogueManager.characterStyle = "Intrepid";
-        dialogueManager.characterNumber = 3f;
+        gameManager.characterName = "Stellar Simon";
+        gameManager.characterRole = "Explorer";
+        gameManager.characterStyle = "Intrepid";
+        gameManager.characterNumber = 3f;
         dialogueManager.dialogueTextAsset = simonStory;
         choiceMade = true;
     }
@@ -49,7 +56,7 @@ public class CharacterSelect : MonoBehaviour
     {
         if (choiceMade == true)
         {
-            Debug.Log("Character name is: " + dialogueManager.characterName + " Character Role is " + dialogueManager.characterRole + "Character Style is " + dialogueManager.characterStyle + " Character number is " + dialogueManager.characterNumber);
+            Debug.Log("Character name is: " + gameManager.characterName + " Character Role is " + gameManager.characterRole + "Character Style is " + gameManager.characterStyle + " Character number is " + dialogueManager.characterNumber);
             characterSelect.SetActive(false);
             shipSelect.SetActive(true);
         }
@@ -61,24 +68,24 @@ public class CharacterSelect : MonoBehaviour
 
     public void SetShipSpeedy()
     {
-        dialogueManager.shipStrength1 = "Fast";
-        dialogueManager.shipStrength2 = "nimble";
-        dialogueManager.shipWeakeness = "Horrible Circuit Breakers";
+        gameManager.shipStrength1 = "Fast";
+        gameManager.shipStrength2 = "nimble";
+        gameManager.shipWeakeness = "Horrible Circuit Breakers";
         shipChoiceMade = true;
     }
     public void SetShipSneaky()
     {
-        dialogueManager.shipStrength1 = "Cloaking Device";
-        dialogueManager.shipStrength2 = "nimble";
-        dialogueManager.shipWeakeness = "Fuel Hog";
+        gameManager.shipStrength1 = "Cloaking Device";
+        gameManager.shipStrength2 = "nimble";
+        gameManager.shipWeakeness = "Fuel Hog";
         shipChoiceMade = true;
         
     }
     public void SetShipPowerful()
     {
-        dialogueManager.shipStrength1 = "Well armed";
-        dialogueManager.shipStrength2 = "Powerful Shields";
-        dialogueManager.shipWeakeness = "Grim reputation";
+        gameManager.shipStrength1 = "Well armed";
+        gameManager.shipStrength2 = "Powerful Shields";
+        gameManager.shipWeakeness = "Grim reputation";
         shipChoiceMade = true;
         
     }
