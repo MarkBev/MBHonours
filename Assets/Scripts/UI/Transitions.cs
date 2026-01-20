@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Transitions : MonoBehaviour
@@ -8,11 +9,21 @@ public class Transitions : MonoBehaviour
     [Header("UI Elements")]
     [SerializeField] GameObject blackScreen;
     [SerializeField] GameObject gameManager;
+   
 
+    public void startGame()
+    {
+        SceneManager.LoadScene("TestScene"); // Replace with character select scene
+    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void blackScreenFade()
     {
-        
+
     }
+
 }
