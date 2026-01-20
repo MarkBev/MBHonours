@@ -28,7 +28,7 @@ public class UICharacterSelect : MonoBehaviour
     {
 
         profilePicture.sprite = simonProfilePic;
-        title.text = "StellarSimon";
+        title.text = "Stellar Simon";
         bio.text = simonBio;
 
     }

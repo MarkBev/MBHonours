@@ -14,6 +14,9 @@ public class CharacterSelect : MonoBehaviour
     [Header("ui elements")]
     [SerializeField] private GameObject characterSelect;
     [SerializeField] private GameObject shipSelect;
+    [Header("Scene elements")]
+    [SerializeField] private GameObject shuttle;
+    [SerializeField] private GameObject bridge;
 
     private bool choiceMade = false;
     private bool shipChoiceMade = false;
@@ -96,6 +99,8 @@ public class CharacterSelect : MonoBehaviour
         {
             shipSelect.SetActive(false);
             dialogueManager.EnterDialogueMode();
+            shuttle.SetActive(false);
+            bridge.SetActive(true);
         }
         else
         {
