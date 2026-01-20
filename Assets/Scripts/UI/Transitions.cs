@@ -13,7 +13,7 @@ public class Transitions : MonoBehaviour
 
     public void startGame()
     {
-        SceneManager.LoadScene("TestScene"); // Replace with character select scene
+        SceneManager.LoadScene("Main Scene"); // Replace with character select scene
     }
 
     public void Quit()

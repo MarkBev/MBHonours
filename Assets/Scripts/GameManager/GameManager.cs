@@ -3,7 +3,9 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("UI Elements")]
     public TMP_FontAsset currentFontAsset;
+    public GameObject settingsMenu;
 
     [Header("Character Attributes")]
     public float characterNumber = 1.0f;
@@ -15,6 +17,8 @@ public class GameManager : MonoBehaviour
     public string shipStrength2 = "DefaultStrength2";
     public string shipWeakeness = "DefaultShipWeakness";
 
+    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
  
 
@@ -23,6 +27,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-
+    public void openSettings()
+    {
+        settingsMenu.SetActive(true);
+    }
+    public void closeSettings()
+    {
+        settingsMenu.SetActive(false);
+    }
    
 }
