@@ -7,9 +7,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using System.Collections;
-using UnityEngine.SearchService;
-using Gaskellgames;
-using NUnit.Framework.Internal.Commands;
+
 
 
 public class DialogueManager : MonoBehaviour
@@ -254,7 +252,10 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator DisplayLine (string line)
     {
         //clears any existing text
-        dialogueText.text = " ";
+        // dialogueText.text = " "; Original method
+        dialogueText.text = line;
+        dialogueText.maxVisibleCharacters = 0;
+
         //makes sure that lines cannot be skipped without going to the end first, and hides choices and the continue icon
         canContinueToNextLine = false;
         continueIcon.SetActive(false);
@@ -266,10 +267,10 @@ public class DialogueManager : MonoBehaviour
         foreach (char letter in line.ToCharArray())
         {
             //if player presses space jumps to the end of the line
-            if (Keyboard.current[Key.Space].wasPressedThisFrame)
+            if (Keyboard.current[Key.Space].wasReleasedThisFrame)
                 {
-                dialogueText.text = line;
-                canContinueToNextLine = false;
+                //dialogueText.text = line;
+                dialogueText.maxVisibleCharacters = line.Length;
                 
                 break;
                 }
@@ -277,7 +278,7 @@ public class DialogueManager : MonoBehaviour
             if (letter == '<' || isAddingRichTextTag)
             {
                 isAddingRichTextTag = true;
-                dialogueText.text += letter;
+                
                 if(letter == '>')
                 {
                     isAddingRichTextTag = false;
@@ -287,7 +288,8 @@ public class DialogueManager : MonoBehaviour
             else
             {
                 //adds each character to the displayed line
-                dialogueText.text += letter;
+                //dialogueText.text += letter;
+                dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(textSpeed);
             }
         }

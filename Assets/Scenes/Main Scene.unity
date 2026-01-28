@@ -483,6 +483,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shuttle
       objectReference: {fileID: 0}
+    - target: {fileID: 5035256266690044981, guid: 6ca35af1cf48502458551ac179ac4b8c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5958623463894711117, guid: 6ca35af1cf48502458551ac179ac4b8c, type: 3}
       propertyPath: m_LocalScale.z
       value: 10.082001
