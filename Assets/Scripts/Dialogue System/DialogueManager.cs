@@ -57,6 +57,9 @@ public class DialogueManager : MonoBehaviour
     private const string PORTRAIT_TAG = "portrait";
     private const string LAYOUT_TAG = "layout";
 
+    private PlayerInput playerInput;
+    private InputActionAsset inputActions;
+
     private void Awake()
     {
         if (instance == null)
@@ -64,7 +67,14 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }
         instance = this;
-       
+        playerInput = GetComponent<PlayerInput>();
+
+        playerInput.onActionTriggered += PlayerInput_onActionTriggered;
+    }
+
+    private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
+    {
+        Debug.Log(context);
     }
 
     public static DialogueManager GetInstance()
@@ -95,15 +105,15 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
-        // Need to add trigger for taking player input and continuing
+               
         
-        if (canContinueToNextLine && Keyboard.current[Key.Space].wasPressedThisFrame)
+        if (currentStory.currentChoices.Count == 0 && canContinueToNextLine && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0)))
         {
             ContinueStory();
         }
 
     }
-
+   
     public void EnterDialogueMode()
     {
         currentStory = new Story(dialogueTextAsset.text);
@@ -230,7 +240,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentStory.ChooseChoiceIndex(choiceIndex);
         }
-       // ContinueStory();
+        ContinueStory();
     }
 
     public void HideChoices()
@@ -266,14 +276,14 @@ public class DialogueManager : MonoBehaviour
 
         foreach (char letter in line.ToCharArray())
         {
-            //if player presses space jumps to the end of the line
-            if (Keyboard.current[Key.Space].wasReleasedThisFrame)
-                {
-                //dialogueText.text = line;
-                dialogueText.maxVisibleCharacters = line.Length;
-                
-                break;
-                }
+             //if player presses space jumps to the end of the line - currently breaks the character typing
+             //if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+             //   {
+             //   dialogueText.text = line;
+             //   dialogueText.maxVisibleCharacters = line.Length;
+             
+             //   break;
+             //   }
 
             if (letter == '<' || isAddingRichTextTag)
             {
