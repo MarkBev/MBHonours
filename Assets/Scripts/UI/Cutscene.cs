@@ -10,7 +10,7 @@ public class Cutscene : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponent<VideoPlayer>();
+       player = GetComponent<VideoPlayer>();
         player.clip = null;
     }
 

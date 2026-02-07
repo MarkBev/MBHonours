@@ -247,7 +247,8 @@ MonoBehaviour:
   shipStrength1: DefaultStrength1
   shipStrength2: DefaultStrength2
   shipWeakeness: DefaultShipWeakness
-  introclip: {fileID: 0}
+  introclip: {fileID: 32900000, guid: 450e02d6f808f39428eb4e2b6ad1d085, type: 3}
+  player: {fileID: 0}
 --- !u!4 &100406973
 Transform:
   m_ObjectHideFlags: 0
@@ -3945,9 +3946,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 100406972}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: beginGame
+      - m_Target: {fileID: 169040186}
+        m_TargetAssemblyTypeName: Transitions, Assembly-CSharp
+        m_MethodName: startGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

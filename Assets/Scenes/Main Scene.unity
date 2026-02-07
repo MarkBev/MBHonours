@@ -136,7 +136,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!328 &92352960
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 0
   m_WaitForFirstFrame: 1
@@ -1817,6 +1817,8 @@ MonoBehaviour:
   shipStrength1: DefaultStrength1
   shipStrength2: DefaultStrength2
   shipWeakeness: DefaultShipWeakness
+  videoPlayer: {fileID: 92352959}
+  dialogueManager: {fileID: 826516286}
 --- !u!114 &826516287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1928,7 +1930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &990725307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2992,7 +2994,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 25ac94c9aee1f054d833fb440f9a62ff, type: 3}
     - target: {fileID: 5686858449059236944, guid: b648ff83c9e6038499b69f4121e2a904, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5713828854726244971, guid: b648ff83c9e6038499b69f4121e2a904, type: 3}
       propertyPath: m_SizeDelta.x

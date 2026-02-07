@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,7 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private VideoClip introclip;
     
     
-    private GameObject player;
+    [SerializeField] private GameObject player;
     private Cutscene cutsceneScript;
     private DialogueManager dialogueManager;
     private CharacterSelect characterSelect;
@@ -46,15 +48,23 @@ public class GameManager : MonoBehaviour
         settingsMenu.SetActive(false);
     }
    
-    public void beginGame()
+    public void beginGame(DialogueManager DM, GameObject VP)
     {
-        SceneManager.LoadScene("Main Scene");
-        player = (GameObject) FindFirstObjectByType(typeof(VideoPlayer));
+        dialogueManager = DM;
+        player = VP;
         cutsceneScript = player.GetComponent<Cutscene>();
-        dialogueManager = (DialogueManager) FindFirstObjectByType(typeof(DialogueManager));
+        if (cutsceneScript != null)
+        {
+            Debug.Log("cutscene script loaded."); 
+        }
         characterSelect = dialogueManager.GetComponent<CharacterSelect>();
+        if (characterSelect != null)
+        {
+            Debug.Log("characterSelect Loaded");
+        }
         cutsceneScript.PlayVideo(introclip);
         characterSelect.StartCharacterSelect();
 
     }
+    
 }

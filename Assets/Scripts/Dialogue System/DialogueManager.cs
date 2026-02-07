@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using System.Collections;
+using UnityEngine.Video;
 
 
 
@@ -59,6 +60,9 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerInput playerInput;
     private InputActionAsset inputActions;
+    private GameManager gameManager;
+    [SerializeField] private GameObject videoPlayer;
+    [SerializeField] private DialogueManager dialogueManager;
 
     private void Awake()
     {
@@ -67,9 +71,11 @@ public class DialogueManager : MonoBehaviour
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }
         instance = this;
+        DontDestroyOnLoad(this.gameObject);
         playerInput = GetComponent<PlayerInput>();
 
         playerInput.onActionTriggered += PlayerInput_onActionTriggered;
+        gameManager = (GameManager)FindFirstObjectByType(typeof(GameManager));
     }
 
     private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
@@ -97,6 +103,7 @@ public class DialogueManager : MonoBehaviour
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
+        gameManager.beginGame(dialogueManager, videoPlayer);
     }
 
     private void Update()
