@@ -1,5 +1,7 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,11 +18,19 @@ public class GameManager : MonoBehaviour
     public string shipStrength1 = "DefaultStrength1";
     public string shipStrength2 = "DefaultStrength2";
     public string shipWeakeness = "DefaultShipWeakness";
-
+    [Header("Videoclips to be played")]
+    [SerializeField] private VideoClip introclip;
     
+    
+    private GameObject player;
+    private Cutscene cutsceneScript;
+    private DialogueManager dialogueManager;
+    private CharacterSelect characterSelect;
+
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
- 
+
 
     void Start()
     {
@@ -36,4 +46,15 @@ public class GameManager : MonoBehaviour
         settingsMenu.SetActive(false);
     }
    
+    public void beginGame()
+    {
+        SceneManager.LoadScene("Main Scene");
+        player = (GameObject) FindFirstObjectByType(typeof(VideoPlayer));
+        cutsceneScript = player.GetComponent<Cutscene>();
+        dialogueManager = (DialogueManager) FindFirstObjectByType(typeof(DialogueManager));
+        characterSelect = dialogueManager.GetComponent<CharacterSelect>();
+        cutsceneScript.PlayVideo(introclip);
+        characterSelect.StartCharacterSelect();
+
+    }
 }

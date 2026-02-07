@@ -62,7 +62,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null)
         {
             Debug.LogWarning("Found more than one Dialogue Manager in the scene");
         }

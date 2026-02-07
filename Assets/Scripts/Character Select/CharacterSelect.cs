@@ -33,9 +33,18 @@ public class CharacterSelect : MonoBehaviour
         dialogueManager = GetComponent<DialogueManager>();
         choiceMade = false;
         shipChoiceMade = false;
-        characterSelect.SetActive(true);
+        characterSelect.SetActive(false);
         shipSelect.SetActive(false);
     }
+
+
+    public void StartCharacterSelect()
+    {
+        characterSelect.SetActive(true);
+    }
+
+
+
     public void SetCharacterChuck()
     {
         gameManager.characterName = "Chuck Cluckers";
