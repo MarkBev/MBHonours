@@ -132,11 +132,11 @@ GameObject:
   - component: {fileID: 92352962}
   m_Layer: 0
   m_Name: Video Player
-  m_TagString: Untagged
+  m_TagString: VideoPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!328 &92352960
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a1d9d793097fdc4b9ff58abedaf7a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  videoLength: 0
 --- !u!1 &97331171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1378,74 +1379,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538183789}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &593371270
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 593371271}
-  - component: {fileID: 593371272}
-  m_Layer: 0
-  m_Name: Video Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &593371271
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593371270}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 826516284}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!328 &593371272
-VideoPlayer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593371270}
-  m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 450e02d6f808f39428eb4e2b6ad1d085, type: 3}
-  m_TargetCameraAlpha: 1
-  m_TargetCamera3DLayout: 0
-  m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: a09099e4497a5ee468cac6df03aa4068, type: 2}
-  m_TimeReference: 0
-  m_TargetMaterialRenderer: {fileID: 0}
-  m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 2
-  m_AspectRatio: 3
-  m_DataSource: 0
-  m_TimeUpdateMode: 2
-  m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
-  m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
-  m_SkipOnDrop: 1
-  m_Looping: 0
-  m_WaitForFirstFrame: 1
-  m_FrameReadyEventEnabled: 0
-  m_VideoShaders: []
 --- !u!224 &620183992 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4481330774225575852, guid: b648ff83c9e6038499b69f4121e2a904, type: 3}
@@ -1756,8 +1689,7 @@ Transform:
   m_LocalPosition: {x: 5.225467, y: -2.6069014, z: 7.4095974}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 593371271}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &826516285
@@ -1817,7 +1749,6 @@ MonoBehaviour:
   shipStrength1: DefaultStrength1
   shipStrength2: DefaultStrength2
   shipWeakeness: DefaultShipWeakness
-  videoPlayer: {fileID: 92352959}
   dialogueManager: {fileID: 826516286}
 --- !u!114 &826516287
 MonoBehaviour:
@@ -1926,11 +1857,11 @@ GameObject:
   - component: {fileID: 990725308}
   m_Layer: 5
   m_Name: Cutscene
-  m_TagString: Untagged
+  m_TagString: RenderTexture
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &990725307
 RectTransform:
   m_ObjectHideFlags: 0

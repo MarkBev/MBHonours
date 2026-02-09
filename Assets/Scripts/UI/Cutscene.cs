@@ -6,12 +6,14 @@ public class Cutscene : MonoBehaviour
 {
      
     private VideoPlayer player;
-    private float videoLength;
+    public float videoLength;
+    private GameObject renderTextureDisplay;
 
     private void Awake()
     {
        player = GetComponent<VideoPlayer>();
         player.clip = null;
+        renderTextureDisplay = GameObject.FindWithTag("RenderTexture");
     }
 
     //recieves a video clip, sets the player to that video, then plays it
@@ -20,19 +22,21 @@ public class Cutscene : MonoBehaviour
         //sets the clip to be played
         player.clip = clip; 
         videoLength = (float)player.clip.length;
+        Debug.Log("Video Length is" +  videoLength);
         //enables the video player
-        player.enabled = true;   
+        renderTextureDisplay.SetActive(true);
         player.Play();
-        StartCoroutine(CutsceneRoutine());
+        //StartCoroutine(CutsceneRoutine());
 
     }
 
 
-    private void StopPlaying()
+    public void StopPlaying()
     {
         player.Stop();
         player.enabled = false;
         player.clip = null;
+        renderTextureDisplay.SetActive(false);
     }
 
     IEnumerator CutsceneRoutine()

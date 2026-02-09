@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 100406972}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -247,7 +247,7 @@ MonoBehaviour:
   shipStrength1: DefaultStrength1
   shipStrength2: DefaultStrength2
   shipWeakeness: DefaultShipWeakness
-  introclip: {fileID: 32900000, guid: 450e02d6f808f39428eb4e2b6ad1d085, type: 3}
+  introclip: {fileID: 32900000, guid: 2a6f38f757155ee40918ff862f3e7010, type: 3}
   player: {fileID: 0}
 --- !u!4 &100406973
 Transform:
@@ -662,6 +662,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1125059159}
+  - {fileID: 391463210}
   - {fileID: 1814390936}
   - {fileID: 1029787102}
   - {fileID: 1762746770}
@@ -671,7 +672,6 @@ RectTransform:
   - {fileID: 1599366581}
   - {fileID: 107255743}
   - {fileID: 1405201978}
-  - {fileID: 391463210}
   - {fileID: 136410414}
   - {fileID: 490115384}
   m_Father: {fileID: 0}

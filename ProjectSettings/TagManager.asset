@@ -8,6 +8,9 @@ TagManager:
   - dice2
   - dice3
   - Canvas
+  - GameManager
+  - VideoPlayer
+  - RenderTexture
   layers:
   - Default
   - TransparentFX

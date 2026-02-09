@@ -60,9 +60,11 @@ public class DialogueManager : MonoBehaviour
 
     private PlayerInput playerInput;
     private InputActionAsset inputActions;
+    private GameObject gameManagerObject;
     private GameManager gameManager;
-    [SerializeField] private GameObject videoPlayer;
+    private GameObject videoPlayerObject;
     [SerializeField] private DialogueManager dialogueManager;
+    private VideoPlayer videoPlayer;
 
     private void Awake()
     {
@@ -75,7 +77,10 @@ public class DialogueManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         playerInput.onActionTriggered += PlayerInput_onActionTriggered;
-        gameManager = (GameManager)FindFirstObjectByType(typeof(GameManager));
+        gameManagerObject= GameObject.FindWithTag("GameManager");
+        videoPlayerObject = GameObject.FindWithTag("VideoPlayer");
+        gameManager = gameManagerObject.GetComponent<GameManager>();
+
     }
 
     private void PlayerInput_onActionTriggered(InputAction.CallbackContext context)
@@ -103,7 +108,7 @@ public class DialogueManager : MonoBehaviour
             choicesText[index] = choice.GetComponentInChildren<TextMeshProUGUI>();
             index++;
         }
-        gameManager.beginGame(dialogueManager, videoPlayer);
+        gameManager.beginGame(dialogueManager, videoPlayerObject);
     }
 
     private void Update()

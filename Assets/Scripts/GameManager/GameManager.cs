@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
     private Cutscene cutsceneScript;
     private DialogueManager dialogueManager;
     private CharacterSelect characterSelect;
+    
 
 
 
@@ -63,8 +64,20 @@ public class GameManager : MonoBehaviour
             Debug.Log("characterSelect Loaded");
         }
         cutsceneScript.PlayVideo(introclip);
+        StartCoroutine(CutsceneRoutine());
+        cutsceneScript.StopPlaying();
         characterSelect.StartCharacterSelect();
 
     }
-    
+
+    IEnumerator CutsceneRoutine()
+    {
+
+        //waits for the duration of the video, then stops the player and clears the clip.
+        cutsceneScript.videoLength = (float)introclip.length;
+        Debug.Log("Wait Started");
+        yield return new WaitForSeconds(cutsceneScript.videoLength);
+        Debug.Log("Wait Finished.");
+        
+    }
 }
