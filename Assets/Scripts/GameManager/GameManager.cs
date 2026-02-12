@@ -1,6 +1,8 @@
+using Ink.Parsed;
 using JetBrains.Annotations;
 using System.Collections;
 using TMPro;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
@@ -28,7 +30,11 @@ public class GameManager : MonoBehaviour
     private Cutscene cutsceneScript;
     private DialogueManager dialogueManager;
     private CharacterSelect characterSelect;
-    
+    private bool diceRoll;
+    private GameObject diceRollSystem;
+    private GameObject currentScene;
+    private GameObject oldScene;
+    private bool gameActive = false;
 
 
 
@@ -38,7 +44,43 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        oldScene = null;
     }
+
+    private void Update()
+    {
+
+        //Initiates Dice roll || STILL TO BE IMPLEMENTED IF NEEDED ||
+        // diceRoll = ((Ink.Runtime.BoolValue)DialogueManager.GetInstance().GetVariablesState("diceRoll")).value;
+        //if (diceRoll)
+        //{
+
+        //    DiceRoll();
+
+        // }
+
+        //Changes Active Background Scene
+        if (gameActive)
+        {
+            bool newScene = ((Ink.Runtime.BoolValue)DialogueManager.GetInstance().GetVariablesState("newScene")).value;
+            if (newScene)
+            {
+                Debug.Log("Scene Change Initiated.");
+                string Scene = ((Ink.Runtime.StringValue)DialogueManager.GetInstance().GetVariablesState("scene")).value;
+                currentScene.SetActive(false);
+                oldScene = currentScene;
+                currentScene = GameObject.Find(Scene);
+                if (currentScene == null)
+                {
+                    Debug.LogWarning("Cannot find new Scene object");
+                    currentScene = oldScene;
+                }
+                currentScene.SetActive(true);
+
+            }
+        }
+    }
+
 
     public void openSettings()
     {
@@ -63,11 +105,27 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("characterSelect Loaded");
         }
+        gameActive = true;
         cutsceneScript.PlayVideo(introclip);
         StartCoroutine(CutsceneRoutine());
         cutsceneScript.StopPlaying();
         characterSelect.StartCharacterSelect();
 
+    }
+
+    public void NextStory (TextAsset textAsset)
+    {
+        dialogueManager.dialogueTextAsset = textAsset;
+        dialogueManager.EnterDialogueMode();
+    }
+
+
+
+    public void DiceRoll()
+    {
+        diceRollSystem = GameObject.FindWithTag("diceRollSystem");
+        diceRollSystem.SetActive(true);
+       
     }
 
     IEnumerator CutsceneRoutine()

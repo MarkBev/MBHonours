@@ -108,8 +108,8 @@ public class CharacterSelect : MonoBehaviour
         {
             shipSelect.SetActive(false);
             dialogueManager.EnterDialogueMode();
-            shuttle.SetActive(false);
-            bridge.SetActive(true);
+            //shuttle.SetActive(false);
+            //bridge.SetActive(true);
         }
         else
         {

@@ -1741,6 +1741,18 @@ MonoBehaviour:
   - {fileID: 1460818285}
   - {fileID: 1543976686}
   portraitAnimator: {fileID: 2050019851}
+  globalsInkFile:
+    inkAsset: {fileID: 102900000, guid: f83f5939afd71d9478eb850a64198e2b, type: 3}
+    jsonAssetDirectory: {fileID: 0}
+    jsonAsset: {fileID: 0}
+    unhandledCompileErrors: []
+    recursiveIncludeErrorPaths: []
+    errors: []
+    warnings: []
+    todos: []
+    masterInkAssets: []
+    localIncludePaths: []
+    includes: []
   dialogueTextAsset: {fileID: 0}
   characterNumber: 1
   characterName: DefaultName

@@ -1,0 +1,1 @@
+﻿{"inkVersion":21,"root":[["^Any variables you want to reference in scripts should be added to globals.ink","\n","^If you're starting a new ink file, add \"INCLUDE globals.ink\" to the start","\n",["done",{"#f":5,"#n":"g-0"}],null],"done",{"#f":1}],"listDefs":{}}

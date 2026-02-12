@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine.EventSystems;
 using System.Collections;
 using UnityEngine.Video;
+using Ink.UnityIntegration;
 
 
 
@@ -29,6 +30,8 @@ public class DialogueManager : MonoBehaviour
     private TextMeshProUGUI[] choicesText;
     [Header("Portrait Elements")]
     [SerializeField] private Animator portraitAnimator;
+    [Header("Globals Ink File")]
+    [SerializeField] private InkFile globalsInkFile;
 
     
 
@@ -49,7 +52,7 @@ public class DialogueManager : MonoBehaviour
      public string shipWeakeness = "DefaultShipWeakness";
     
 
-    private bool dialogueisPlaying;
+    public bool dialogueisPlaying { get; private set; }
     private static DialogueManager instance;
     private Coroutine displayLineCoroutine;
     private bool canContinueToNextLine = false;
@@ -65,6 +68,8 @@ public class DialogueManager : MonoBehaviour
     private GameObject videoPlayerObject;
     [SerializeField] private DialogueManager dialogueManager;
     private VideoPlayer videoPlayer;
+    public DialogueVariables dialogueVariables { get; private set; }
+
 
     private void Awake()
     {
@@ -80,6 +85,7 @@ public class DialogueManager : MonoBehaviour
         gameManagerObject= GameObject.FindWithTag("GameManager");
         videoPlayerObject = GameObject.FindWithTag("VideoPlayer");
         gameManager = gameManagerObject.GetComponent<GameManager>();
+        dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
 
     }
 
@@ -132,6 +138,9 @@ public class DialogueManager : MonoBehaviour
         dialogueisPlaying = true;
         dialoguePanel.SetActive(true);
        characterSelectPanel.SetActive(false);
+        //starts tracking variables in global.ink
+        dialogueVariables.StartListening(currentStory);
+
         //feed chosen character & ship data into debug log as a temporary check until it can be fed into the dialogue.
         Debug.Log("Character name is: "+characterName+" Character Role is "+characterRole+"Character Style is "+characterStyle+" Character number is "+characterNumber);
         Debug.Log("Ship Strength 1 is: " + shipStrength1 + " Ship Strength 2 is: " + shipStrength2 + " Ship Weakness is: " + shipWeakeness);
@@ -205,6 +214,8 @@ public class DialogueManager : MonoBehaviour
         dialogueisPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+        //removes listener to prevent multiple listeners being active
+        dialogueVariables.StopListening(currentStory);
     }
 
     private void DisplayChoices()
@@ -216,7 +227,6 @@ public class DialogueManager : MonoBehaviour
         if (currentChoices.Count == 0)
         {
             choicePanel.SetActive(false);
-            Debug.Log("there are no choices for this line of dialogue");
         }
         //enables the choice panel if choice is to be made
         if (currentChoices.Count > 0)
@@ -321,5 +331,17 @@ public class DialogueManager : MonoBehaviour
     
         //display choices if any for this dialogue line
         DisplayChoices();
+    }
+
+    public Ink.Runtime.Object GetVariablesState(string variableName)
+    {
+        Ink.Runtime.Object variableValue = null;
+        dialogueVariables.variables.TryGetValue(variableName, out variableValue);
+        if (variableValue == null)
+        {
+            Debug.LogWarning("Ink Variable was found to be null: " + variableName);
+        }
+        return variableValue;
+
     }
 }
